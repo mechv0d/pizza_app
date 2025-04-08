@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Смена</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/src/js/data_get.js"></script>
+    <script type="text/javascript" src="/src/js/check_auth.js"></script>
+    <script type="text/javascript" src="/src/js/load_shift.js"></script>
+    <script type="text/javascript" src="/src/js/create_take.js"></script>
+</head>
+<body>
+
+<script>check_auth()</script>
+
+<script>load_shift()</script>
+
+
+<header>
+    <h1>Смена</h1>
+    <div class="header-menu">
+        <button class="button-colored focused" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-colored" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-colored" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-colored" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-colored">Администрирование</button>
+    </div>
+</header>
+
+<section id="shifters" class="shifters">
+    <span class="body-text">Работники загружаются или не найдены.</span>
+</section>
+
+<script>
+    data_get('s_takes').then(
+        takes => {
+            console.log(takes)
+            let shifters = document.querySelector('#shifters')
+            if (takes.length > 0) shifters.innerHTML = ''
+            takes.map(take => {
+                create_take(take['take_pk'], take['emp_id'], take['surname'], take['name'], take['last_name'],
+                    take['status'], take['start_time'], take['end_time'], take['place'], take['closed']).then(
+                        shifter => {shifters.innerHTML += shifter;
+                         // console.log(take)
+                        }
+
+                )
+            })
+        }
+    )</script>
+
+<section class="vertical-content">
+    <div class="set-shifter-form">
+        <span class="body-text">Поставить сотрудника</span>
+        <form class="horizontal">
+            <label>
+                <input class="input-id"/>
+            </label>
+            <button class="button-colored">Поставить</button>
+        </form>
+    </div>
+    <div class="set-shifter-form">
+        <span class="body-text">Пароль смены</span>
+        <div class="horizontal">
+            <span class="body-text big">************</span>
+            <button class="button-colored">Скопировать</button>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Авторизация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/src/js/add_count.js"></script>
+    <script type="text/javascript" src="/src/js/load_component.js"></script>
+    <script type="text/javascript" src="/src/js/go_to.js"></script>
 </head>
 <body>
 
+<header>
+    <h1>Авторизация</h1>
+    <div class="header-menu">
+        <button class="button-colored">Главная</button>
+        <button class="button-colored">Работа</button>
+        <button class="button-colored">Архив</button>
+        <button class="button-colored">Смена</button>
+        <button class="button-colored">Администрирование</button>
+    </div>
+</header>
+
+    <form class="vertical-form" id="authForm">
+    <label class="body-text">ID пользователя</label>
+    <input class="input-id" id="userId"/>
+    <label class="body-text">Пароль</label>
+    <input class="input-passwd" id="password"/>
+    <label class="body-text">Ваш PIN-код</label>
+    <input class="input-pin" id="pinCode"/>
+
+    <button class="button-colored" type="button" onclick="proceed_auth()">Войти</button>
+</form>
+
+<script>
+    async function proceed_auth() {
+        const id = document.getElementById("userId").value;
+        const passwd = document.getElementById("password").value;
+        const pin = document.getElementById("pinCode").value;
+
+        try {
+            await eel.proceed_auth(id, passwd, pin)();
+        } catch (error) {
+            console.error("Error calling Python function:", error);
+        }
+    }
+</script>
 </body>
 </html>

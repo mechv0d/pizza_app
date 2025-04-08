@@ -2,22 +2,35 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Pizza App</title>
+    <title>Главная</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="src/js/add_count.js"></script>
-    <script type="text/javascript" src="src/js/header.js"></script>
-
-    <script type="text/javascript" src="./eel.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/src/js/data_get.js"></script>
+    <script type="text/javascript" src="/src/js/check_auth.js"></script>
 </head>
 <body>
 
-<button onclick="base_header()">1234</button>
-<!--<script>base_header()</script>-->
+<script>check_auth()</script>
+
+<header>
+    <h1>Главная</h1>
+    <div class="header-menu">
+        <button class="button-colored focused" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-colored" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-colored" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-colored" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-colored">Администрирование</button>
+    </div>
+</header>
 
 <section class="horizontal-content">
-        <span class="body-text">
-            Вы вошли как: Сергей Рем (Администратор)
+        <span id="a_name_sp" class="body-text">
+            Вы вошли как:
         </span>
+    <script>
+        n = data_get('a_name').then(r => {document.getElementById("a_name_sp").innerText += `${r} `})
+        s = data_get('a_status').then(r => {document.getElementById("a_name_sp").innerText += `(${r})`})
+    </script>
     <button class="button-outlined">
         <img class="icon" src="" alt=""/>
         <span>Сообщение</span>
@@ -27,8 +40,10 @@
         <span>История смены</span>
     </button>
     <button class="button-overlay">Выйти</button>
-    <span class="body-text">Вход выполнен: 8:49, 31.03.2025</span>
-    <span class="body-text">ID: 333-454-900</span>
+    <span id="a_time_sp" class="body-text">Вход выполнен: </span>
+    <script>data_get('a_time').then(r => {document.getElementById("a_time_sp").innerText += `${r}`})</script>
+    <span id="a_id_sp" class="body-text">ID: </span>
+    <script>data_get('a_id_fancy').then(r => {document.getElementById("a_id_sp").innerText += `${r}`})</script>
 </section>
 
 <div style="display: none" class="message-frame">

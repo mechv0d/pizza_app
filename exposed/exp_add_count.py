@@ -1,7 +1,7 @@
 from app.data import main_data
 import eel
 
-
-def add_count() -> float:
+@eel.expose
+def add_count():
     main_data.count += 1
     return main_data.count
