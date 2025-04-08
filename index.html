@@ -1,14 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pizza App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="src/js/add_count.js"></script>
+    <script type="text/javascript" src="src/js/header.js"></script>
+
     <script type="text/javascript" src="./eel.js"></script>
 </head>
 <body>
-    <h1>Hello, Cepega!</h1>
-<p id="count">Счёт: 0</p>
-<button onclick="add_count(this)">Нажми меня</button>
+
+<button onclick="base_header()">1234</button>
+<!--<script>base_header()</script>-->
+
+<section class="horizontal-content">
+        <span class="body-text">
+            Вы вошли как: Сергей Рем (Администратор)
+        </span>
+    <button class="button-outlined">
+        <img class="icon" src="" alt=""/>
+        <span>Сообщение</span>
+    </button>
+    <button class="button-outlined" onclick="add_count()">
+        <img class="icon" src="" alt=""/>
+        <span>История смены</span>
+    </button>
+    <button class="button-overlay">Выйти</button>
+    <span class="body-text">Вход выполнен: 8:49, 31.03.2025</span>
+    <span class="body-text">ID: 333-454-900</span>
+</section>
+
+<div style="display: none" class="message-frame">
+    <form class="message-form">
+        <label class="body-text">Отправить сообщение</label>
+        <label>
+            <textarea class="message-input" placeholder="Ваше сообщение"></textarea>
+        </label>
+        <button class="button-colored">Отправить</button>
+        <img class="message-button-close" src="" alt=""/>
+    </form>
+</div>
+<div style="display: none" class="shift-archive-frame">
+    <div class="archive-content">
+        <span class="body-text">Сообщения</span>
+        <div class="message">
+            <div class="message-label">
+                <span>16:39</span>
+                <span>Рукин Денис</span>
+            </div>
+            <p class="message-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quam nunc, accumsan quis volutpat id,
+                venenatis ut leo. Aliquam non porttitor libero.
+            </p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
