@@ -1,7 +1,10 @@
 from exposed.data_get import data_get
-from exposed.proceed_auth import proceed_auth
+from exposed.auth import *
 from exposed.load_shift import load_shift
 from exposed.create_take import create_take
+from exposed.index_msg import *
+from exposed.create_archive_card import create_archive_card
+from exposed.create_food_card import create_food_card
 import eel
 
 debug = True

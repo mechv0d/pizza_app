@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <title>Главная</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+
+    <link href="/src/css/main.css" rel="stylesheet">
+    <link href="/src/css/header.css" rel="stylesheet">
+    <link href="/src/css/index.css" rel="stylesheet">
+
+
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="/src/js/data_get.js"></script>
-    <script type="text/javascript" src="/src/js/check_auth.js"></script>
+    <script type="text/javascript" src="/src/js/location_exposed.js"></script>
+    <script type="text/javascript" src="/src/js/auth_functions.js"></script>
+    <script type="text/javascript" src="/src/js/index_msg.js"></script>
 </head>
 <body>
 
@@ -15,11 +28,11 @@
 <header>
     <h1>Главная</h1>
     <div class="header-menu">
-        <button class="button-colored focused" onclick="location.href='/index.html'">Главная</button>
-        <button class="button-colored" onclick="location.href='/src/pages/work.html'">Работа</button>
-        <button class="button-colored" onclick="location.href='/src/pages/archive.html'">Архив</button>
-        <button class="button-colored" onclick="location.href='/src/pages/shift.html'">Смена</button>
-        <button class="button-colored">Администрирование</button>
+        <button class="button-outlined focused" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-outlined">Администрирование</button>
     </div>
 </header>
 
@@ -28,35 +41,43 @@
             Вы вошли как:
         </span>
     <script>
-        n = data_get('a_name').then(r => {document.getElementById("a_name_sp").innerText += `${r} `})
-        s = data_get('a_status').then(r => {document.getElementById("a_name_sp").innerText += `(${r})`})
+        n = data_get('a_name').then(r => {
+            document.getElementById("a_name_sp").innerText += ` ${r} `
+        })
+        s = data_get('a_status').then(r => {
+            document.getElementById("a_name_sp").innerText += ` (${r})`
+        })
     </script>
-    <button class="button-outlined">
+    <button class="button-outlined" onclick="show_msg()">
         <img class="icon" src="" alt=""/>
         <span>Сообщение</span>
     </button>
-    <button class="button-outlined" onclick="add_count()">
+    <button class="button-outlined" onclick="">
         <img class="icon" src="" alt=""/>
         <span>История смены</span>
     </button>
-    <button class="button-overlay">Выйти</button>
-    <span id="a_time_sp" class="body-text">Вход выполнен: </span>
-    <script>data_get('a_time').then(r => {document.getElementById("a_time_sp").innerText += `${r}`})</script>
-    <span id="a_id_sp" class="body-text">ID: </span>
-    <script>data_get('a_id_fancy').then(r => {document.getElementById("a_id_sp").innerText += `${r}`})</script>
+    <button class="button-overlay" onclick="exit_auth()">Выйти</button>
+    <span id="a_time_sp" class="body-text">Вход выполнен:</span>
+    <script>data_get('a_time').then(r => {
+        document.getElementById("a_time_sp").innerText += ` ${r}`
+    })</script>
+    <span id="a_id_sp" class="body-text">ID:</span>
+    <script>data_get('a_id_fancy').then(r => {
+        document.getElementById("a_id_sp").innerText += ` ${r}`
+    })</script>
 </section>
 
-<div style="display: none" class="message-frame">
+<div id="msg" style="display: none" class="message-frame">
     <form class="message-form">
         <label class="body-text">Отправить сообщение</label>
         <label>
-            <textarea class="message-input" placeholder="Ваше сообщение"></textarea>
+            <textarea id="msg-text" class="message-input" placeholder="Ваше сообщение"></textarea>
         </label>
-        <button class="button-colored">Отправить</button>
+        <button class="button-colored" onclick="send_msg()">Отправить</button>
         <img class="message-button-close" src="" alt=""/>
     </form>
 </div>
-<div style="display: none" class="shift-archive-frame">
+<div id="archive" style="display: none" class="shift-archive-frame">
     <div class="archive-content">
         <span class="body-text">Сообщения</span>
         <div class="message">

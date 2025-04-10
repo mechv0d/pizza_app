@@ -4,25 +4,38 @@
     <meta charset="UTF-8">
     <title>Работа</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="/src/js/add_count.js"></script>
-    <script type="text/javascript" src="/src/js/load_component.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+
+    <link href="/src/css/main.css" rel="stylesheet">
+    <link href="/src/css/header.css" rel="stylesheet">
+    <link href="/src/css/work.css" rel="stylesheet">
 
     <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/src/js/load_component.js"></script>
+    <script type="text/javascript" src="/src/js/create_archive_card.js"></script>
+    <script type="text/javascript" src="/src/js/location_exposed.js"></script>
+    <script type="text/javascript" src="/src/js/auth_functions.js"></script>
 </head>
 <body>
+
+<script>check_auth()</script>
 
 <header>
     <h1>Работа</h1>
     <div class="header-menu">
-        <button class="button-colored">Главная</button>
-        <button class="button-colored focused">Работа</button>
-        <button class="button-colored">Архив</button>
-        <button class="button-colored">Смена</button>
-        <button class="button-colored">Администрирование</button>
+        <button class="button-outlined" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-outlined focused" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-outlined">Администрирование</button>
     </div>
     <div class="header-end-frame">
-        <button class="button-add">Добавить позицию</button>
-        <button class="button-update">Обновить</button>
+        <button class="button-add" onclick="window.location='/src/pages/add_position.html'">Добавить позицию</button>
+        <button class="button-update" onclick="window.reload()">Обновить</button>
         <button class="button-sort">
             <span>Сортировать</span>
             <img src="" alt=""/>
@@ -30,53 +43,20 @@
     </div>
 </header>
 
-<section class="food-content">
-    <div class="food-card">
-        <div class="span-wrapper food-card-header">
-            <span>Название блюда</span>
-        </div>
-        <div class="weight-calories">
-            <div class="span-wrapper food-card-client premium">
-                <span>А-8015 (Григорий)</span>
-            </div>
-            <div class="span-wrapper food-card-weight">
-                <span>300 г.</span>
-            </div>
-            <div class="span-wrapper food-card-cal">
-                <span>600 ккал.</span>
-            </div>
-        </div>
-        <div class="money-frame">
-            <div class="span-wrapper food-card-client">
-                <span>429₽</span>
-            </div>
-            <div class="span-wrapper food-card-client medium">
-                <span>+18₽</span>
-            </div>
-        </div>
-        <div class="ingredients">
-            <span class="ingredients-text">Тесто, помидоры, сыр, Тесто, помидоры, сыр, Тесто, помидоры, сыр, </span>
-            <span class="extra-info">Взято: 9:10 (Яимов Артём)</span>
-        </div>
-        <div class="buttons">
-            <div class="ready-content">
-                <span class="ready-status red green orange">Отменено</span>
-            <span class="ready-status small">10:41</span>
-            </div>
-            <div class="button-content">
-                <button class="button-colored">Архивировать</button>
-                <button class="button-colored">Сообщение</button>
-                <button class="button-colored">Изменить</button>
-                <button class="button-overlay">Сведения</button>
-                <div class="flag-container">
-                    <button class="button-flag">
-                        <span>Сообщить</span>
-                        <img src="" alt="">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+<section id='food-content' class="food-content">
+
 </section>
+
+<script>
+    let cards = load_food_cards()
+    let food_content = document.querySelector('#food-content')
+    console.log(cards)
+    cards.then(res => {
+        for (let i = 0; i < res.length; i++) {
+            food_content.innerHTML += res[i]
+        }
+    })
+</script>
+
 </body>
 </html>

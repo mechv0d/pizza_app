@@ -1,0 +1,168 @@
+.food-content {
+    width: 100%;
+    box-sizing: border-box;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 8px 0 32px 0;
+}
+
+.food-card {
+    width: 413px;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.food-card:last-child {
+    /*width: 100%;*/
+}
+
+.food-card .span-wrapper {
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    padding: 8px 8px 0 8px;
+}
+
+.food-card .span-wrapper span {
+    filter: contrast(1);
+}
+
+.food-card .food-card-header {
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, .9);
+}
+
+.weight-calories {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.span-wrapper.food-card-client {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 4px 8px 0 8px;
+
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.food-card-client.thin {
+    font-weight: 400;
+}
+
+.food-card-client.medium {
+    font-weight: 500;
+}
+
+.food-card .money-frame {
+    width: fit-content;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-left: 8px;
+}
+
+.food-card .ingredients {
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 8px 0 8px;
+}
+
+.ingredients .ingredients-text {
+    font-weight: 400;
+    font-size: 14px;
+    width: 100%;
+    height: fit-content;
+    color: rgba(0, 0, 0, .9);
+}
+
+.ingredients .extra-info {
+    color: rgba(0, 0, 0, .75);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.food-card .buttons {
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 8px 8px 8px;
+}
+
+.ready-content {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 0;
+}
+
+.ready-status {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, .2);
+    color: rgba(0, 0, 0, .7);
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.ready-status.red {
+    background-color: rgba(255, 30, 0, .18);
+}
+
+.ready-status.green {
+    background-color: rgba(0, 255, 30, .18);
+}
+
+.ready-status.orange {
+    background-color: rgba(255, 187, 0, .18);
+}
+
+.buttons .button-content {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+}

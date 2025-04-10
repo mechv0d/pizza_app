@@ -1,5 +1,5 @@
 import eel
-
+from app.data import main_data as data
 
 @eel.expose
 def create_take(tid, uid, sname, name, lname, status, st_time, end_time, place, closed):
@@ -7,7 +7,7 @@ def create_take(tid, uid, sname, name, lname, status, st_time, end_time, place, 
         shifter = f.read()
         shifter = shifter.replace('%tid', str(tid)) \
             .replace('%uid', uid) \
-            .replace('%name', f'{sname} {name} {lname}') \
+            .replace('%name', f'{sname} {name} {lname} {"(Вы)" if uid in [data.a_id_fancy, data.a_id] else ""}') \
             .replace('%status', 'admin' if status == 1 else '') \
             .replace('%place', place) \
             .replace('%stime', str(st_time)) \

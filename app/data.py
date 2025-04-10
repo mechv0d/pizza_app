@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Data:
     is_auth: bool = False
     a_id: str = None
@@ -6,6 +9,13 @@ class Data:
     a_time: str = None
     a_name: str = None
     a_status: str = None
+
+    s_sql = "SELECT * FROM shift WHERE closed = 0 ORDER BY start_time DESC LIMIT 1;"
+    s_id: str = None
+    s_start_time: datetime = None
+    s_end_time: datetime = None
+    s_closed: bool = True
+    s_passwd: str = None
     s_takes: list[dict] = []
 
 

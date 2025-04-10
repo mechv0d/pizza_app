@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <title>Добавить позицию</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="/src/js/add_count.js"></script>
-    <script type="text/javascript" src="/src/js/load_component.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+
+    <link href="/src/css/main.css" rel="stylesheet">
+    <link href="/src/css/header.css" rel="stylesheet">
 
     <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/src/js/load_component.js"></script>
+    <script type="text/javascript" src="/src/js/create_archive_card.js"></script>
+    <script type="text/javascript" src="/src/js/location_exposed.js"></script>
+    <script type="text/javascript" src="/src/js/auth_functions.js"></script>
 </head>
 <body>
 
 <header>
     <h1>Добавить позицию</h1>
     <div class="header-menu">
-        <button class="button-colored">Главная</button>
-        <button class="button-colored">Работа</button>
-        <button class="button-colored">Архив</button>
-        <button class="button-colored">Смена</button>
-        <button class="button-colored">Администрирование</button>
+        <button class="button-outlined focused" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-outlined">Администрирование</button>
     </div>
 </header>
 

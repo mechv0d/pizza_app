@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <title>Смена</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+
+    <link href="/src/css/main.css" rel="stylesheet">
+    <link href="/src/css/header.css" rel="stylesheet">
+    <link href="/src/css/shift.css" rel="stylesheet">
+
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="/src/js/data_get.js"></script>
-    <script type="text/javascript" src="/src/js/check_auth.js"></script>
     <script type="text/javascript" src="/src/js/load_shift.js"></script>
     <script type="text/javascript" src="/src/js/create_take.js"></script>
+    <script type="text/javascript" src="/src/js/auth_functions.js"></script>
 </head>
 <body>
 
@@ -20,11 +30,11 @@
 <header>
     <h1>Смена</h1>
     <div class="header-menu">
-        <button class="button-colored focused" onclick="location.href='/index.html'">Главная</button>
-        <button class="button-colored" onclick="location.href='/src/pages/work.html'">Работа</button>
-        <button class="button-colored" onclick="location.href='/src/pages/archive.html'">Архив</button>
-        <button class="button-colored" onclick="location.href='/src/pages/shift.html'">Смена</button>
-        <button class="button-colored">Администрирование</button>
+        <button class="button-outlined" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-outlined focused" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-outlined">Администрирование</button>
     </div>
 </header>
 
@@ -41,10 +51,10 @@
             takes.map(take => {
                 create_take(take['take_pk'], take['emp_id'], take['surname'], take['name'], take['last_name'],
                     take['status'], take['start_time'], take['end_time'], take['place'], take['closed']).then(
-                        shifter => {shifters.innerHTML += shifter;
-                         // console.log(take)
-                        }
-
+                    shifter => {
+                        shifters.innerHTML += shifter;
+                        // console.log(take)
+                    }
                 )
             })
         }
@@ -55,7 +65,7 @@
         <span class="body-text">Поставить сотрудника</span>
         <form class="horizontal">
             <label>
-                <input class="input-id"/>
+                <input placeholder="000-000-000" class="input-id"/>
             </label>
             <button class="button-colored">Поставить</button>
         </form>
