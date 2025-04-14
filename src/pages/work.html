@@ -31,7 +31,7 @@
         <button class="button-outlined focused" onclick="location.href='/src/pages/work.html'">Работа</button>
         <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
         <button class="button-outlined" onclick="location.href='/src/pages/shift.html'">Смена</button>
-        <button class="button-outlined">Администрирование</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/admin.html'">Администрирование</button>
     </div>
     <div class="header-end-frame">
         <button class="button-add" onclick="window.location='/src/pages/add_position.html'">Добавить позицию</button>
@@ -41,6 +41,13 @@
             <img src="" alt=""/>
         </button>
     </div>
+
+    <script>
+        const button = document.querySelector('.focused');
+        button.onclick = () => {
+        }
+        console.log(button)
+    </script>
 </header>
 
 <section id='food-content' class="food-content">

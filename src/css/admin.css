@@ -1,0 +1,13 @@
+.admin-shift-text {
+    padding: 4px 8px;
+    background-color: black;
+    color: white;
+    cursor: default;
+    font-weight: 500;
+}
+
+.admin-passwd-require {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: rgba(60, 255, 0, .2);
+}

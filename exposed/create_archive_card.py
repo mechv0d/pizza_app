@@ -53,6 +53,7 @@ def create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIn
             .replace('%fExtraInfo', f'<br>Доп. информация: {fExtraInfo}' if fExtraInfo else '') \
             .replace('%fArchiveBtnDisplay', 'flex') \
             .replace('%fMakeArchiveBtnDisplay', 'none') \
+            .replace('%fTakeButtonDisplay', 'none') \
             .replace('%fReadyButtonDisplay', 'none')
 
         return card

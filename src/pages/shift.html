@@ -19,6 +19,7 @@
     <script type="text/javascript" src="/src/js/load_shift.js"></script>
     <script type="text/javascript" src="/src/js/create_take.js"></script>
     <script type="text/javascript" src="/src/js/auth_functions.js"></script>
+    <script type="text/javascript" src="/src/js/shift_admin.js"></script>
 </head>
 <body>
 
@@ -34,8 +35,15 @@
         <button class="button-outlined" onclick="location.href='/src/pages/work.html'">Работа</button>
         <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
         <button class="button-outlined focused" onclick="location.href='/src/pages/shift.html'">Смена</button>
-        <button class="button-outlined">Администрирование</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/admin.html'">Администрирование</button>
     </div>
+
+    <script>
+        const button = document.querySelector('.focused');
+        button.onclick = () => {
+        }
+        console.log(button)
+    </script>
 </header>
 
 <section id="shifters" class="shifters">
@@ -63,12 +71,20 @@
 <section class="vertical-content">
     <div class="set-shifter-form">
         <span class="body-text">Поставить сотрудника</span>
-        <form class="horizontal">
+        <div class="horizontal">
             <label>
-                <input placeholder="000-000-000" class="input-id"/>
+                <input id="f_uid" type="text" placeholder="000-000-000" class="input-id"/>
             </label>
-            <button class="button-colored">Поставить</button>
-        </form>
+            <label>
+                <input id="f_place" type="text" placeholder="Место" class="input-id"/>
+            </label>
+            <button class="button-colored" onclick="{
+                let uid = document.querySelector('#f_uid').value
+                let place = document.querySelector('#f_place').value
+                add_take(uid, place).then(r => location.reload())
+
+            }">Поставить</button>
+        </d>
     </div>
     <div class="set-shifter-form">
         <span class="body-text">Пароль смены</span>

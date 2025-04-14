@@ -23,8 +23,8 @@ def load_shift():
         if len(result) > 0:
             result = result[0]
             data.s_id = result['shift_pk']
-            data.s_start_time = result['start_time']
-            data.s_end_time = result['end_time']
+            data.s_start_time_raw = result['start_time']
+            data.s_end_time_raw = result['end_time']
             data.s_closed = result['closed']
             data.s_passwd = result['password']
 

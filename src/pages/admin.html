@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Администрирование</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+
+    <link href="/src/css/main.css" rel="stylesheet">
+    <link href="/src/css/header.css" rel="stylesheet">
+    <link href="/src/css/index.css" rel="stylesheet">
+    <link href="/src/css/admin.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.4/build/global/luxon.min.js"></script>
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/src/js/data_get.js"></script>
+    <script type="text/javascript" src="/src/js/location_exposed.js"></script>
+    <script type="text/javascript" src="/src/js/auth_functions.js"></script>
+    <script type="text/javascript" src="/src/js/load_shift.js"></script>
+    <script type="text/javascript" src="/src/js/shift_admin.js"></script>
+
+
+</head>
+<body>
+
+<script>check_auth(); check_status()</script>
+
+<script>load_shift()</script>
+
+<header>
+    <h1>Админ</h1>
+    <div class="header-menu">
+        <button class="button-outlined" onclick="location.href='/index.html'">Главная</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/work.html'">Работа</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/archive.html'">Архив</button>
+        <button class="button-outlined" onclick="location.href='/src/pages/shift.html'">Смена</button>
+        <button class="button-outlined focused" onclick="location.href='/src/pages/admin.html'">Администрирование
+        </button>
+    </div>
+
+    <script>
+        const button = document.querySelector('.focused');
+        button.onclick = () => {
+        }
+        console.log(button)
+    </script>
+</header>
+
+<section class="horizontal-content" style="flex-direction: column; gap: 16px; align-items: start">
+        <span id="curr_shift" class="body-text admin-shift-text">
+        </span>
+    <script>
+        data_get('s_closed').then(cl => {
+            let el = document.querySelector('#curr_shift')
+            let closed = cl === 1
+            if (!closed)
+                data_get('s_id').then(data => el.innerText += 'Текущая смена: #' + data)
+            else
+                data_get('s_id').then(data => el.innerText += 'Последняя смена: #' + data)
+        })
+
+    </script>
+    <span id="st_time" class="body-text">
+            Начало:
+        </span>
+    <script>
+        data_get('s_start_time').then(data => {
+            document.querySelector('#st_time').innerText += ' ' + data
+        })
+    </script>
+    <span style="display:none;" id="end_time" class="body-text">
+            Конец:
+        </span>
+    <script>
+        data_get('s_closed').then(cl => {
+            data_get('s_end_time').then(end_time => {
+                let closed = cl === 1
+                let has_end = end_time !== ''
+                if (closed && has_end) {
+                    let el = document.querySelector('#end_time')
+                    el.style.display = 'block'
+                    el.innerText += ' ' + end_time
+                }
+            })
+        })
+
+
+    </script>
+    <span id="time_passed" class="body-text">
+        </span>
+    <script>
+
+        function timeDifferenceLuxon(date1, date2) {
+            const dt1 = luxon.DateTime.fromSQL(date1);
+            const dt2 = luxon.DateTime.fromSQL(date2);
+            const diff = dt2.diff(dt1, ['hours', 'minutes']);
+            return {
+                hours: Math.round(diff.hours),
+                minutes: Math.round(diff.minutes)
+            };
+        }
+
+
+        data_get('s_closed').then(cl => {
+            data_get('s_end_time').then(end_time => {
+                data_get('s_start_time').then(start_time => {
+                    let closed = cl === 1
+                    let has_end = end_time !== ''
+
+                    if (closed && has_end) {
+                        const diff = timeDifferenceLuxon(start_time, end_time);
+                        document.querySelector('#time_passed').innerText = `Смена длилась ${diff.hours} ч. ${diff.minutes} мин.`
+                    } else {
+                        const diff = timeDifferenceLuxon(start_time, luxon.DateTime.now().toSQLTime());
+                        document.querySelector('#time_passed').innerText = `Прошло: ${diff.hours} ч. ${diff.minutes} мин.`
+                    }
+                })
+            })
+        })
+
+
+    </script>
+    <span id="passwd_require" class="body-text admin-passwd-require">
+            Пароль:
+        </span>
+    <script>
+        data_get('s_passwd').then(passwd => {
+            let el = document.querySelector('#passwd_require')
+            if (passwd !== '' && passwd != null) {
+                el.innerText += ' требуется'
+                el.style = 'background-color: rgba(255, 0, 0, .2);'
+            } else el.innerText += ' не требуется'
+        })
+    </script>
+    <button id="shift-btn" class="button-colored" onclick=""></button>
+
+    <script>
+        data_get('s_closed').then(cl => {
+            let closed = cl === 1;
+            let el = document.querySelector('#shift-btn')
+            if (closed) {
+                el.innerText = 'Открыть новую смену'
+                el.onclick = () => {
+                    open_new_shift()
+                    location.reload()
+                }
+            } else {
+                el.innerText = 'Закрыть смену'
+                data_get('s_id').then(sid => {
+                    el.onclick = () => {
+                        close_shift(sid)
+                        location.reload()
+                    }
+                })
+            }
+        })
+    </script>
+
+</section>
+
+</body>
+</html>

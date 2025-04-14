@@ -68,7 +68,8 @@ def create_food_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngre
             .replace('%fClientComment', f'<br>Комментарий: {fClientComment}' if fClientComment else '') \
             .replace('%fExtraInfo', f'<br>Доп. информация: {fExtraInfo}' if fExtraInfo else '') \
             .replace('%fArchiveBtnDisplay', 'none') \
-            .replace('%fReadyButtonDisplay', 'flex' if fReadyState in [1, 2] else 'none') \
+            .replace('%fReadyButtonDisplay', 'flex' if fReadyState == 1 else 'none') \
+            .replace('%fTakeButtonDisplay', 'flex' if fReadyState == 0 else 'none') \
             .replace('%fMakeArchiveBtnDisplay', 'flex' if fReadyState == 3 or fReadyState < 0 else 'none')
 
         return card

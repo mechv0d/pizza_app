@@ -1,11 +1,13 @@
 <div class="shifter-panel" id="%tid">
     <span class="body-text name %status">%name</span>
     <span class="body-text">%place</span>
-    <span class="body-text">%uid</span>
-    <span class="body-text">%stime</span>
-    <span class="body-text">%etime</span>
+    <span title="ID" class="body-text">%uid</span>
+    <span title="Начало работы" class="body-text">%stime</span>
+    <span title="Конец работы" class="body-text">%etime</span>
     <div class="buttons">
-        <button class="button-overlay">Сведения</button>
-        <button class="button-colored">Закрыть</button>
+        <button class="button-overlay" onclick="{
+            let el
+        }">Изменить</button>
+        <button class="button-colored" style="display: %disp" onclick="close_take(%tid).then(r => location.reload())">Закрыть</button>
     </div>
 </div>

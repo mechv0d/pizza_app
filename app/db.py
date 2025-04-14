@@ -31,9 +31,8 @@ class ConnectDb:
             self.mydb.commit()
             return self.cursor.fetchall()  # Возвращаем результаты запроса
         except mysql.connector.Error as err:
-            print(f"Ошибка при выполнении запроса: {err}")
             self.mydb.rollback()  # Отмена транзакции в случае ошибки
-            return None
+            raise mysql.connector.Error(err.msg)
 
     def close_connection(self):
         if self.mydb:

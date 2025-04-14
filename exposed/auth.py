@@ -33,6 +33,7 @@ def proceed_auth(uid, passwd, pin):
             data.a_passwd = passwd
             data.a_time = get_datetime_string()
             data.a_name = result[0]['surname'] + ' ' + result[0]['name']
+            data.a_status_raw = result[0]['status']
             match result[0]['status']:
                 case 0:
                     data.a_status = 'Работник'
