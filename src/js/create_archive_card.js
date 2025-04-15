@@ -1,5 +1,5 @@
-async function create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngredients, fTakeTime, fTaker, fReadyState, fReadyTime, fArchiveTime) {
-    let card = await eel.create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngredients, fTakeTime, fTaker, fReadyState, fReadyTime, fArchiveTime)()
+async function create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngredients, fTakeTime, fTaker, fReadyState, fReadyTime, fArchiveTime, fId) {
+    let card = await eel.create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngredients, fTakeTime, fTaker, fReadyState, fReadyTime, fArchiveTime, fId)()
     return card
 }
 

@@ -22,7 +22,7 @@ def time_until_ready(taken_time, minutes_to_cook):
 
 @eel.expose
 def create_food_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngredients, fTakeTime, fTaker,
-                     fReadyState, fReadyTime, fClientComment, fExtraInfo, fTimeToCook):
+                     fReadyState, fReadyTime, fClientComment, fExtraInfo, fTimeToCook, fId, fOrderedTime):
     with open('src/components/food-card.html', 'r', encoding='utf-8') as f:
         emp = get_employer(fTaker)
         r_state = 'Неизвестно'
@@ -34,14 +34,16 @@ def create_food_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngre
             case -1:
                 r_state = 'Отменено (клиент)'
             case 0:
-                r_state = 'Взято'
+                r_state = 'Создано'
             case 1:
                 r_state = 'Готовится'
             case 2:
                 r_state = 'Готово'
             case 3:
                 r_state = 'Получено'
-        if fReadyState < 2 and fReadyState >= 0:
+
+        r_color = ''
+        if 2 > fReadyState > 0:
             r_color = 'orange'
         elif fReadyState == 2:
             r_color = 'green'
@@ -50,8 +52,13 @@ def create_food_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngre
         elif fReadyState == 3:
             r_color = ''
         card = f.read()
-        r_time = time_until_ready(fTakeTime, fTimeToCook) if fReadyState == 1 \
+
+        r_time = time_until_ready(fTakeTime, fTimeToCook) if fReadyState in [0, 1] \
             else "{:02d}:{:02d}".format(fReadyTime.seconds // 3600, (fReadyTime.seconds % 3600) // 60)
+
+        if fReadyState == 0:
+            r_time = fOrderedTime.strftime("%H:%M")
+
         card = card.replace('%fName', fName) \
             .replace('%fNumb', f'{fNumb[0]}-{fNumb[1::]}') \
             .replace('%fClientName', fClient) \
@@ -61,7 +68,7 @@ def create_food_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngre
             .replace('%fTips', str(fTips)) \
             .replace('%fIngredients', fIngredients) \
             .replace('%fTakeTime', fTakeTime.strftime("%H:%M") if fTakeTime else '') \
-            .replace('%fTaker', f'{emp["surname"]} {emp["name"]}' if fTakeTime else '') \
+            .replace('%fTaker', f'{emp["surname"]} {emp["name"]}' if fTakeTime and fTaker and emp else '') \
             .replace('%fReadyState', r_state) \
             .replace('%fReadyColor', r_color) \
             .replace('%fReadyTime', r_time) \
@@ -70,7 +77,8 @@ def create_food_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngre
             .replace('%fArchiveBtnDisplay', 'none') \
             .replace('%fReadyButtonDisplay', 'flex' if fReadyState == 1 else 'none') \
             .replace('%fTakeButtonDisplay', 'flex' if fReadyState == 0 else 'none') \
-            .replace('%fMakeArchiveBtnDisplay', 'flex' if fReadyState == 3 or fReadyState < 0 else 'none')
+            .replace('%fCardId', fId) \
+            .replace('%fMakeArchiveBtnDisplay', 'flex' if fReadyState == 2 or fReadyState < 0 else 'none')
 
         return card
 
@@ -82,7 +90,7 @@ def load_food_cards():
         return fp_list
     db = ConnectDb()
     if db.mydb:
-        result = db.execute_query('select * from food_position where archived = 0 order by ordered_time limit 501')
+        result = db.execute_query('select * from food_position where archived = 0 and is_menu = 0 order by ordered_time limit 501')
         for fp in result:
             fp_list.append(create_food_card(
                 fp["name"],
@@ -99,7 +107,9 @@ def load_food_cards():
                 fp["ready_time"],
                 fp["client_comment"],
                 fp["extra_info"],
-                fp["minutes_to_cook"]
+                fp["minutes_to_cook"],
+                fp["fp_pk"],
+                fp["ordered_time"]
             ))
 
         db.close_connection()

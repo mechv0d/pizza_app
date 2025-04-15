@@ -1,5 +1,5 @@
 header {
-    width: 100%;
+    width: var(--content-width);
     height: fit-content;
     display: flex;
     flex-direction: row;
@@ -30,6 +30,10 @@ h1 {
     align-items: center;
     gap: 10px;
     padding: 8px 0;
+}
+
+header button:hover {
+    padding: 8px 28px;
 }
 
 .header-end-frame {

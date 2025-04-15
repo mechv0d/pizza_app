@@ -1,5 +1,5 @@
 .food-content {
-    width: 100%;
+    width: var(--content-width);
     box-sizing: border-box;
     height: fit-content;
     display: flex;
@@ -11,7 +11,7 @@
 
 .food-card {
     width: 413px;
-    height: fit-content;
+    height: auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

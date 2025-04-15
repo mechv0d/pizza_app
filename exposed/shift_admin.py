@@ -1,12 +1,10 @@
 import eel
-from app.data import main_data as data
+from app.data import main_data as data, timenow_sql
 from app.db import ConnectDb
 
 from datetime import datetime as dt
 
-
-def timenow_sql():
-    return dt.now().strftime('"%Y-%m-%d %H:%M:%S"')
+from app.dialog import error_dialog
 
 
 @eel.expose
@@ -32,6 +30,15 @@ def close_shift(other):
         return
     db = ConnectDb()
     if db.mydb:
+        taken_positions = db.execute_query(f"""
+        select fp_pk from food_position where ready_state = 0 or ready_state = 1 or ready_state = 2 
+        and is_menu = 0 and shift_pk = {other}
+        """)
+
+        if len(taken_positions) > 0:
+            error_dialog('Ошибка!', f'Нельзя закрыть смену, пока есть блюда в готовке: {len(taken_positions)}')
+            return
+
         result = db.execute_query(f'''
                 UPDATE shift
                 SET closed = 1, end_time = {timenow_sql()}

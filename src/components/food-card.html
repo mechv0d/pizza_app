@@ -32,9 +32,9 @@
             </div>
             <div class="button-content">
                 <button style="display: %fArchiveBtnDisplay" disabled class="button-outlined focused">%fArchiveTime</button>
-                <button style="display: %fTakeButtonDisplay" class="button-colored" onclick="">Взять в готовность</button>
-                <button style="display: %fReadyButtonDisplay" class="button-colored">Подтвердить готовность</button>
-                <button style="display: %fMakeArchiveBtnDisplay" class="button-colored">Архивировать</button>
+                <button style="display: %fTakeButtonDisplay" class="button-colored" onclick="fc_take('%fCardId').then(r => location.reload())">Взять в готовность</button>
+                <button style="display: %fReadyButtonDisplay" class="button-colored" onclick="fc_ready('%fCardId').then(r => location.reload())">Подтвердить готовность</button>
+                <button style="display: %fMakeArchiveBtnDisplay" class="button-colored" onclick="fc_close('%fCardId').then(r => location.reload())">Архивировать</button>
                 <button class="button-overlay">Сведения</button>
                 <div class="flag-container">
                     <button class="button-flag">

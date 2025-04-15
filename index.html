@@ -59,7 +59,7 @@
         <img class="icon" src="" alt=""/>
         <span>Сообщение</span>
     </button>
-    <button class="button-outlined" onclick="">
+    <button class="button-outlined" onclick="document.getElementById('archive').style.display = 'flex'">
         <img class="icon" src="" alt=""/>
         <span>История смены</span>
     </button>
@@ -74,17 +74,25 @@
     })</script>
 </section>
 
-<div id="msg" style="display: none" class="message-frame">
-    <form class="message-form">
-        <label class="body-text">Отправить сообщение</label>
-        <label>
-            <textarea id="msg-text" class="message-input" placeholder="Ваше сообщение"></textarea>
-        </label>
+<div id="msg" style="display: none; z-index: 1" class="message-frame">
+    <div class="message-frame" style="background-color: transparent; z-index: 3"
+         onclick="this.parentNode.style.display = 'none'"></div>
+    <form class="message-form" onclick="">
+        <label for="msg-text" class="body-text">Отправить сообщение</label>
+        <textarea id="msg-text" class="message-input" placeholder="Ваше сообщение"></textarea>
         <button class="button-colored" onclick="send_msg()">Отправить</button>
-        <img class="message-button-close" src="" alt=""/>
+        <!--        <img class="message-button-close" src="" alt=""/>-->
+        <svg onclick="document.getElementById('msg').style.display = 'none'"
+             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
+            <path d="M18 6 6 18"/>
+            <path d="m6 6 12 12"/>
+        </svg>
     </form>
 </div>
-<div id="archive" style="display: none" class="shift-archive-frame">
+<div id="archive" style="display: none; z-index: 1" class="message-frame">
+    <div class="message-frame" style="background-color: transparent; z-index: 3"
+         onclick="this.parentNode.style.display = 'none'"></div>
     <div class="archive-content">
         <span class="body-text">Сообщения</span>
         <div class="message">

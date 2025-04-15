@@ -6,7 +6,7 @@ from app.data import main_data as data
 
 @eel.expose
 def create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIngredients, fTakeTime, fTaker,
-                        fReadyState, fReadyTime, fArchiveTime, fClientComment, fExtraInfo):
+                        fReadyState, fReadyTime, fArchiveTime, fClientComment, fExtraInfo, fId):
     with open('src/components/food-card.html', 'r', encoding='utf-8') as f:
         emp = get_employer(fTaker)
         r_state = 'Неизвестно'
@@ -54,6 +54,7 @@ def create_archive_card(fName, fNumb, fClient, fWeight, fCal, fPrice, fTips, fIn
             .replace('%fArchiveBtnDisplay', 'flex') \
             .replace('%fMakeArchiveBtnDisplay', 'none') \
             .replace('%fTakeButtonDisplay', 'none') \
+            .replace('%fCardId', fId) \
             .replace('%fReadyButtonDisplay', 'none')
 
         return card
@@ -66,7 +67,7 @@ def load_archive_cards():
         return fp_list
     db = ConnectDb()
     if db.mydb:
-        result = db.execute_query('select * from food_position where archived = 1 order by archived_time desc limit 10')
+        result = db.execute_query('select * from food_position where archived = 1 and is_menu = 0 order by archived_time desc limit 10')
         for fp in result:
             fp_list.append(create_archive_card(
                 fp["name"],
@@ -83,7 +84,8 @@ def load_archive_cards():
                 fp["ready_time"],
                 fp["archived_time"],
                 fp["client_comment"],
-                fp["extra_info"]
+                fp["extra_info"],
+                fp["fp_pk"]
             ))
 
         db.close_connection()

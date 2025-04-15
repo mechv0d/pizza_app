@@ -12,12 +12,14 @@
 
     <link href="/src/css/main.css" rel="stylesheet">
     <link href="/src/css/header.css" rel="stylesheet">
+    <link href="/src/css/add_position.css" rel="stylesheet">
 
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript" src="/src/js/load_component.js"></script>
     <script type="text/javascript" src="/src/js/create_archive_card.js"></script>
     <script type="text/javascript" src="/src/js/location_exposed.js"></script>
     <script type="text/javascript" src="/src/js/auth_functions.js"></script>
+    <script type="text/javascript" src="/src/js/food_card_work.js"></script>
 </head>
 <body>
 
@@ -31,45 +33,64 @@
         <button class="button-outlined" onclick="location.href='/src/pages/admin.html'">Администрирование</button>
     </div>
 
-
 </header>
 
 <section class="add-position-content">
-    <form class="ap-form">
+    <form id="ap_form" class="ap-form">
         <div class="inputs">
             <div class="ap-input-div">
-                <label>Название блюда</label>
-                <input class="input-ap" placeholder="Текст"/>
+                <label for="dish_name">Название блюда</label>
+                <input id="dish_name" required class="input-ap" placeholder="Текст"/>
             </div>
             <div class="ap-input-div">
-                <label>Имя клиента</label>
-                <input class="input-ap" placeholder="Текст"/>
+                <label for="client_name">Имя клиента</label>
+                <input id="client_name" required class="input-ap" placeholder="Текст"/>
             </div>
             <div class="ap-input-div">
-                <label>Список ингридиентов</label>
-                <textarea class="input-ap big" placeholder="Текст"></textarea>
+                <label for="weight">Предположительный вес</label>
+                <input id="weight" type="number" required class="input-ap" placeholder="В граммах"/>
             </div>
             <div class="ap-input-div">
-                <label>Предположительный вес</label>
-                <input class="input-ap" placeholder="В граммах"/>
+                <label for="cal">Калории</label>
+                <input id="cal" type="number" required class="input-ap" placeholder="Число"/>
             </div>
             <div class="ap-input-div">
-                <label>Комментарий</label>
-                <textarea class="input-ap big" placeholder="Текст"></textarea>
+                <label for="ingredients">Список ингридиентов</label>
+                <textarea id="ingredients" required class="input-ap big" placeholder="Текст"></textarea>
             </div>
             <div class="ap-input-div">
-                <label>Доп. Информация</label>
-                <textarea class="input-ap big" placeholder="Текст"></textarea>
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" class="input-ap big" placeholder="Текст"></textarea>
             </div>
             <div class="ap-input-div">
-                <label>Цена</label>
-                <input class="input-ap" placeholder="В рублях"/>
+                <label for="extra_info">Доп. Информация</label>
+                <textarea id="extra_info" class="input-ap big" placeholder="Текст"></textarea>
+            </div>
+            <div class="ap-input-div">
+                <label for="price">Цена</label>
+                <input id="price" required type="number" step="0.01" class="input-ap" placeholder="В рублях"/>
+            </div>
+            <div class="ap-input-div">
+                <label for="time_to_cook">Минут для готовки</label>
+                <input id="time_to_cook" required type="number" class="input-ap" placeholder="Число"/>
             </div>
         </div>
-        <button class="button-colored">Создать</button>
+        <button class="button-colored" onclick="{
+            fc_create().then(r => location.replace('/src/pages/work.html'))
+        }">Создать
+        </button>
     </form>
+    <script>
+        var form = document.getElementById("ap_form");
+
+        function handleForm(event) {
+            event.preventDefault();
+        }
+
+        form.addEventListener('submit', handleForm);
+    </script>
     <div class="presets">
-        <span>Меню</span>
+        <h2>Меню</h2>
         <button class="button-colored">Открыть меню</button>
     </div>
 </section>

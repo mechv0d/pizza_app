@@ -1,6 +1,8 @@
 :root {
+    --content-width: 836px;
+    --font-family: Inter, sans-serif;
     box-sizing: border-box !important;
-    font-family: Inter, sans-serif !important;
+    font-family: var(--font-family) !important;
     filter: contrast(1) !important;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -64,7 +66,6 @@ button {
 .button-outlined:hover {
     background-color: rgba(0, 0, 0, 0.1);
     color: black;
-    padding: 8px 28px;
 }
 
 .button-outlined:hover .focused {
@@ -164,15 +165,18 @@ textarea, textarea:active, textarea:focus {
 textarea {
     min-height: 120px;
     width: 240px;
+    box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
     padding: 8px;
     color: black;
     font-weight: 500;
+
+    font-family: var(--font-family);
 }
 
 textarea::placeholder {
     font-size: 14px;
     font-weight: 500;
-    color: rgba(0,0,0,.6);
+    color: rgba(0, 0, 0, .6);
 }

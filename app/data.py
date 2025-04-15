@@ -1,6 +1,9 @@
-from datetime import datetime
+from datetime import datetime as dt
 
 debug = True
+
+def timenow_sql():
+    return dt.now().strftime('"%Y-%m-%d %H:%M:%S"')
 
 class Data:
     is_auth: bool = False
@@ -14,8 +17,8 @@ class Data:
 
     s_sql = "SELECT * FROM shift ORDER BY start_time DESC LIMIT 1;"
     s_id: str = None
-    s_start_time_raw: datetime = None
-    s_end_time_raw: datetime = None
+    s_start_time_raw: dt = None
+    s_end_time_raw: dt = None
     s_closed: bool = True
     s_passwd: str = None
     s_takes: list[dict] = []

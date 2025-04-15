@@ -14,6 +14,7 @@ def create_take(tid, uid, sname, name, lname, status, st_time, end_time, place, 
             .replace('%place', place) \
             .replace('%stime', str(st_time)) \
             .replace('%etime', str(end_time)) \
+            .replace('%border_st', 'dashed' if closed else 'solid') \
             .replace('%disp', 'none' if closed in [1, True] or uid in [data.a_id_fancy, data.a_id] else 'flex')
 
         return shifter

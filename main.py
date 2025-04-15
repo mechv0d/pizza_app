@@ -6,6 +6,7 @@ from exposed.index_msg import *
 from exposed.create_archive_card import create_archive_card
 from exposed.create_food_card import create_food_card
 from exposed.shift_admin import close_shift, open_new_shift, add_take, close_take
+from exposed.food_card_work import *
 from app.data import debug
 import eel
 
